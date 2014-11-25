@@ -1,0 +1,14 @@
+<div id='wrapper' style='position:absolute;left:0px;top:0px;width:100%;height:100%;'>
+<canvas id='canvas' width='4000' height='3000' style='background:black'></canvas>
+<div>
+
+script(type='text/javascript', src="/socket.io/socket.io.js")
+script(type='text/javascript', src="/javascripts/bison.js")
+script(type='text/javascript', src='/javascripts/client.js')
+
+<div id="setup" style="position:absolute; top:20%; left:40%; right: 40%"> 
+<button onclick="go('fighter')" name="fighter" id="fighter" value="0"><img src="/images/fighter.png" /></button>
+<button onclick="go('fighter1')" name="fighter1" id="fighter1" value="1" checked=checked><img src="/images/fighter1.png" /></button>
+<button onclick="go('fighter2')" name="fighter2" id="fighter2" value="2" checked=checked><img src="/images/fighter2.png" /></button>
+<button onclick="go('fighter3')" name="fighter3" id="fighter3" value="3" checked=checked><img src="/images/fighter3.png" /></button>
+</div>

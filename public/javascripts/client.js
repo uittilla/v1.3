@@ -23,10 +23,44 @@ var user = "", requestId = 0;
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
+/**
+ *
+ * @returns {Game}
+ * @constructor
+ */
 var Game = function() {
     return this;
 }
 
+/**
+ *
+ * @type {{
+ *    players: {},
+ *    enemies: {},
+ *    socket: *,
+ *    id: null,
+ *    stars: Array,
+ *    suns: Array,
+ *    eimages: {
+ *      img: string
+ *    }[],
+ *    explosion: null,
+ *    level: number,
+ *    fighter: Image,
+ *    fighters: {
+ *       img: string
+ *    }[],
+ *    sys: {
+ *       n2: {
+ *          img: string,
+ *          x: number,
+ *          y: number
+ *       }
+ *    },
+ *    enemy_explode: Audio,
+ *    player_missile: Audio
+ *  }}
+ */
 Game.prototype = {
     players: {},
     enemies: {},
@@ -366,6 +400,9 @@ Game.prototype.render = function () {
     context.restore();
 }
 
+/**
+ *
+ */
 Game.prototype.renderEnemies = function() {
     var baddy;
 
@@ -551,6 +588,9 @@ Game.prototype.renderStars = function () {
     }
 }
 
+/**
+ *
+ */
 Game.prototype.renderNeb = function() {
     var neb = this.sys['n2'];
     context.drawImage(neb.imageObj, neb.x, neb.y);

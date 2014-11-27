@@ -173,7 +173,7 @@ Game.prototype.showMap = function(player) {
 
     for (var e in this.players) {
         enemy = this.players[e];
-        var local_player = (e == Game.id) ? true : false;
+        var local_player = (e == this.id) ? true : false;
         colour = (local_player) ? "green" : "blue";
         track.push({"color": colour, "x": enemy.position.x, "y": enemy.position.y});
     }
@@ -239,7 +239,7 @@ Game.prototype.showStatus = function (player) {
     context.font = "10px sans-serif";
     context.strokeStyle = "white";
 
-    var user = player.id === Game.id;
+    var user = player.id === this.id;
     
     console.log(user, player); 
 

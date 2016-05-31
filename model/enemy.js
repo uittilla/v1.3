@@ -11,7 +11,6 @@ class Enemy {
         this.height = 3000;
         this.width = 4000;
         this.radius = null;
-        this.id = 0;
         this.radius = rad;
         this.col = colours[Math.floor(Math.random() * colours.length)];
         this.position = new Vector2d(Math.floor(Math.random() * (this.width - rad + 1)) + rad,
@@ -25,6 +24,7 @@ class Enemy {
         this.particles = [];
         this.explode = false;
         this.mass = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+
         return this;
     }
 
@@ -137,9 +137,12 @@ class Enemy {
      */
     enemyMissile(enemy) {
         let self = this;
+        let vol = new Vector2d(-(Math.random() * enemy.radius) * 5, (Math.random() * enemy.radius) * 5);
+        let pos = new Vector2d(self.position.x, self.position.y);
+
         return {
-            velocity: new Vector2d(-(Math.random() * enemy.radius) * 5, (Math.random() * enemy.radius) * 5),
-            position: new Vector2d(self.position.x, self.position.y),
+            velocity: vol,
+            position: pos,
             life: 100,
             lifeCtr: 0,
             width: 2,
@@ -216,7 +219,7 @@ class Enemy {
         distance = D - T; //Math.sqrt(T);
 
         // Get the magnitude of the movement vector
-        let mag = moveVector.magnitude()
+        let mag = moveVector.magnitude();
 
         // Finally, make sure that the distance A has to move
         // to touch B is not greater than the magnitude of the

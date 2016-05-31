@@ -4,6 +4,7 @@ const Enemy = require('./enemy');
 const Vector2D = require('./Vector2d');
 
 class Game_v1_3 {
+    
     constructor () {
         this.diff= 0;
         this.round = 0;
@@ -70,8 +71,9 @@ class Game_v1_3 {
      * Update bad guys
      */
     updateEnemy (id, baddy) {
-    
-        for (let j in this.enemies) {
+        let j=0;
+
+        for (j in this.enemies) {
             if(baddy.id !== id) {
                 if (baddy.checkCollision(this.enemies[j])) {
                     baddy.resolveCollision(baddy, this.enemies[j]);
@@ -103,8 +105,9 @@ class Game_v1_3 {
      */
     shipMissileContact (id, missile) {
         let particle = {};
-    
-        for (let p in this.players) {
+        let p        = 0;
+
+        for (p in this.players) {
     
             let player   = this.players[p],
                 dist     = player.position.distance(missile),
@@ -127,8 +130,9 @@ class Game_v1_3 {
      * Player missile to bad guy contact
      */
     missileContact (id, missile) {
-    
-        for (let j in this.enemies) {
+        let j = 0;
+
+        for (j in this.enemies) {
     
             let baddy    = this.enemies[j], particle,
                 dist     = baddy.position.distance(missile),
@@ -169,8 +173,9 @@ class Game_v1_3 {
      * Enemy to player missile contact
      */
     enemyMissileContact (missile) {
-        let player;
-        for (let p in this.players) {
+        let player = {}, p = 0;
+
+        for (p in this.players) {
             player = this.players[p];
     
             let dist     = player.position.distance(missile),
@@ -192,7 +197,9 @@ class Game_v1_3 {
      * circle to circle
      */
     checkCollision (baddyA, i) {
-        for (let j in this.enemies) {
+        let j = 0;
+
+        for (j in this.enemies) {
             if (j != i) {
                 let baddyB   = this.enemies[j],
                     dist     = baddyB.position.distance(baddyA),
@@ -200,7 +207,7 @@ class Game_v1_3 {
     
                 if (dist < min_dist) {                                       // center hit not outside edge (refine)
                     let angle = baddyB.position.getAngle(baddyA),            // radians (where the baddys hit each other)
-                        tx = baddyA.positon.x + Math.cos(angle) * min_dist,  // trajectory x
+                        tx = baddyA.position.x + Math.cos(angle) * min_dist, // trajectory x
                         ty = baddyA.position.y + Math.sin(angle) * min_dist, // trajectory y
                         ax = (tx - baddyB.position.x) * 1.5 * 0.5,           // angle x
                         ay = (ty - baddyB.position.y) * 1.5 * 0.5;           // angle y
@@ -218,8 +225,9 @@ class Game_v1_3 {
      * Ship to enemy contact
      */
     shipContact (player) {
-    
-        for (let j in this.enemies) {
+        let j = 0;
+
+        for (j in this.enemies) {
             let baddy    = this.enemies[j],
                 dist     = player.position.distance(baddy),
                 min_dist = 40;
@@ -263,7 +271,9 @@ class Game_v1_3 {
      */
     bad_guys (num) {
         let baddy;
-        for (let i = 0; i < num; i++) {
+        let i = 0;
+
+        for (i = 0; i < num; i++) {
             baddy = new Enemy();
             baddy.id = Math.round(Math.random() * 2);
             this.enemies[i] = baddy;

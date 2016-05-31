@@ -1,20 +1,22 @@
-var http = require('http');
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+"use strict";
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+const http         = require('http');
+const express      = require('express');
+const path         = require('path');
+const favicon      = require('serve-favicon');
+const logger       = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser   = require('body-parser');
 
-var app = express();
+const routes = require('./routes/index');
+const users  = require('./routes/users');
 
-var Game    = require('./model/game');
-var Player  = require('./model/player');
-var Enemy   = require('./model/enemy');
-var BISON   = require('bison');
+const app = express();
+
+const Game    = require('./model/game');
+const Player  = require('./model/player');
+const Enemy   = require('./model/enemy');
+const BISON   = require('bison');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,15 +64,10 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var server = http.createServer(app);
-
-
-
-var io = require('socket.io').listen(server);
-
-var Kb = require('./model/keyboard');
-
-var Keyboard = new Kb();
+const server = http.createServer(app);
+const io = require('socket.io').listen(server);
+const Kb = require('./model/keyboard');
+const Keyboard = new Kb();
 
 io.sockets.on('connection', function (socket) {
 
@@ -102,8 +99,8 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-var dataStream = [];
-game = new Game();
+let dataStream = [];
+let game = new Game();
 
 var FPS = 200;
 
@@ -114,7 +111,7 @@ setInterval(function () {
     dataStream[1] = game.getEnemies();
 
     io.sockets.emit('update', BISON.encode(dataStream));
-}, 50);
+}, FPS);
 
 server.listen(3000);
 
